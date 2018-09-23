@@ -49,6 +49,7 @@ export default {
         type: 'serial',
         dataDateFormat: 'YYYYMMDD',
         categoryField: 'datetime',
+        creditsPosition: 'bottom-right',
         graphs: [{
           type: 'column',
           valueField: 'count',

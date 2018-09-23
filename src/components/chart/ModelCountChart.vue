@@ -1,8 +1,8 @@
 <template>
   <li class="list-group-item" :id="containerId">
     <p class="h3">
-      <span v-if="type === 'Master'">Master model top usage </span>
-      <span v-if="type === ''">Non-master model top usage top 20 </span>
+      <span v-if="type === 'Master'">마스터 모델 고용 횟수 </span>
+      <span v-if="type === ''">일반 모델 고용 횟수 상위 20위 </span>
       <small class="description" v-show="faction">({{ faction }})</small>
     </p>
     <div class="chart-container"></div>
@@ -22,11 +22,13 @@ export default {
   },
   data: function () {
     return {
+      chartInstance: null,
       faction: null
     }
   },
   mounted: function () {
     Vue.event.$on('render-chart-model-count', this.render)
+    Vue.event.$on('render-chart-model-frequency', this.pullInAll)
     
     this.render(this.faction)
   },
@@ -65,6 +67,7 @@ export default {
         dataProvider: this.modelCount,
         brightnessStep: 35,
         pullOutOnlyOne: true,
+        creditsPosition: 'bottom-right',
         innerRadius: '50%',
         legend: {
           align: 'center',
@@ -83,9 +86,16 @@ export default {
     render: function (faction) {
       this.faction = faction
       
-      window.AmCharts.makeChart(
+      this.chartInstance = window.AmCharts.makeChart(
         document.querySelector(`#${this.containerId} .chart-container`),
         this.configParams)
+    },
+    pullInAll: function (name) {
+      this.chartInstance.chartData.forEach(d => {
+        d.pulled = d.dataContext.name === name
+      })
+
+      this.chartInstance.validateNow()
     },
     requestRenderModelFrequencyChart: function (e) {
       Vue.event.$emit(

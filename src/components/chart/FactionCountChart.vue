@@ -1,7 +1,7 @@
 <template>
   <li class="list-group-item" id="faction-count">
     <p class="h3">
-      <span>Faction mentioned ranking</span>
+      <span>팩션 별 크루 공유 횟수</span>
     </p>
     <div class="chart-container"></div>
   </li>
@@ -19,6 +19,11 @@ export default {
   },
   props: {
     modelList: Array
+  },
+  data: function () {
+    return {
+      chartInstance: null
+    }
   },
   computed: {
     factionCount: function () {
@@ -39,13 +44,12 @@ export default {
           faction: d.faction,
           count: 1,
           color: Vue.util.getFactionColor(d.faction),
-          default: result.length === 0
+          pulled: result.length === 0
         })
         
         return result
       }, [])
       .sort((prev, next) => (prev.count - next.count) * -1)
-      .map((d, i) => { d.default = i === 0; return d })
     },
     configParams: function () {
       return {
@@ -54,9 +58,9 @@ export default {
         valueField: 'count',
         colorField: 'color',
         dataProvider: this.factionCount,
-        pulledField: 'default',
         pullOutDuration: 0,
         pullOutOnlyOne: true,
+        creditsPosition: 'bottom-right',
         innerRadius: '50%',
         legend: {
           align: 'center',
@@ -78,8 +82,6 @@ export default {
       window.AmCharts.makeChart(
         document.querySelector('#faction-count .chart-container'),
         this.configParams)
-      
-      this.requestRenderModelCountChart(this.factionCount[0].faction)
     },
     requestRenderModelCountChart: function (faction) {
       Vue.event.$emit('render-chart-model-count', faction)

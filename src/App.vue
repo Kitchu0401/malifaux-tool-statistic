@@ -1,31 +1,44 @@
 <template>
-  <div class="container" style="padding: 16px 0px;">
-    <ul class="list-group">
-      <faction-count-chart :model-list="modelList" />
-      <model-count-chart :model-list="modelList" :type="'Master'" />
-      <model-count-chart :model-list="modelList" :type="''" />
-      <model-frequency-chart :model-list="modelList" />
-    </ul>
+
+  <div>
+
+    <navigator :change-menu="changeMenu" :current-menu="currentMenu" />
+
+    <div class="container" style="padding: 16px 0px;">
+      <model  :model-list="modelList" v-if="currentMenu === 'model'" />
+      <user   :model-list="modelList" v-if="currentMenu === 'user'" />
+      <user   :model-list="modelList" v-if="currentMenu === 'graph'" />
+    </div>
+
   </div>
+
 </template>
 
 <script>
 import modelList from './data/modelList.json'
 
-import FactionCountChart from './components/FactionCountChart.vue'
-import ModelCountChart from './components/ModelCountChart.vue'
-import ModelFrequencyChart from './components/ModelFrequencyChart.vue'
+import Navigator from './components/Navigator.vue'
+import Model from './components/Model.vue'
+import User from './components/User.vue'
+import Graph from './components/Graph.vue'
 
 export default {
   name: 'app',
   components: {
-    FactionCountChart,
-    ModelCountChart,
-    ModelFrequencyChart
+    Navigator,
+    Model,
+    User,
+    Graph
   },
   data: function () {
     return {
+      currentMenu: 'user',
       modelList: modelList
+    }
+  },
+  methods: {
+    changeMenu: function (menu) {
+      this.currentMenu = menu
     }
   }
 }
@@ -43,6 +56,6 @@ export default {
 
 .chart-container {
   width: 100%;
-  height: 400px;
+  height: 560px;
 }
 </style>
