@@ -4,6 +4,7 @@ import util from './util'
 
 // Cached dataset
 let crewList = []
+let crewFirstModelMap = {}
 
 function WheelLayout() {
   go.CircularLayout.call(this);
@@ -63,7 +64,13 @@ var highlightColor = "red";  // color parameterization
 
 function manipulateData (modelList) {
   crewList = modelList.reduce((resultArray, model) => {
-    // console.log(model.crewIndex, typeof model.crewIndex)
+    // Faction - crew map
+    if (crewFirstModelMap[model.faction] === undefined
+        || crewFirstModelMap[model.faction] > model.name) {
+      crewFirstModelMap[model.faction] = model.name
+    }
+
+    // Crew list
     while (resultArray[model.crewIndex] === undefined) {
       resultArray.push([])
     }
@@ -173,7 +180,12 @@ function initializeGraphObject(domId, modelList) {
 function drawGraph(graphObject, targetFaction, targetModel) {
   const globalColor = util.getFactionColor(targetFaction)
 
-  // temporal objects for optimize
+  // If there's no target model, pick faction's first model
+  if (targetModel === undefined) {
+    targetModel = crewFirstModelMap[targetFaction]
+  }
+
+  // Temporal objects for optimize
   let modelSet = new Set()
   let modelKeyMap = new Object()
 

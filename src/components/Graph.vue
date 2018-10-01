@@ -2,9 +2,20 @@
   
   <ul class="list-group">
     <li class="list-group-item" id="model-relation-graph">
-      <p class="h3">
-        <span>모델 고용 관계 그래프</span>
-      </p>
+      <div class="row">
+        <div class="col-9">
+          <p class="h3">
+            <span>모델 고용 관계</span>
+          </p>
+        </div>
+        <div class="col-3">
+          <select class="form-control" v-model="targetFaction" @change="drawGraph">
+            <option v-for="faction in factionList" :key="faction" :value="faction">
+                {{ faction }}
+            </option>
+          </select>
+        </div>
+      </div>
       <div :id="containerId" :style="containerCss"></div>
     </li>
   </ul>
@@ -21,29 +32,22 @@ export default {
   },
   mounted: function () {
     this.graphObject = Vue.graph.initializeGraphObject(this.containerId, this.modelList)
-    this.draw()
+    this.targetFaction = this.factionList[0]
+    this.drawGraph()
   },
   data: function () {
     return {
       containerId: 'model-relation-graph-container',
       containerCss: { width: '100%', height: '840px' },
-      graphObject: null,
-      targetFaction: 'Guild',
-      targetModel: 'Sonnia'
+      factionList: ['Neverborn', 'Gremlins', 'Resurrectionists', 'Guild', 'Arcanists', 'Outcasts', 'TenThunders'],
+      targetFaction: null,
+      graphObject: null
     }
   },
   methods: {
-    change: function (faction, model) {
-      this.targetFaction = faction
-      this.targetModel = model
-      this.draw()
-    },
-    draw: function () {
+    drawGraph: function () {
       if (!!this.graphObject) {
-        Vue.graph.drawGraph(
-          this.graphObject,
-          this.targetFaction,
-          this.targetModel)
+        Vue.graph.drawGraph(this.graphObject, this.targetFaction)
       }
     }
   }
