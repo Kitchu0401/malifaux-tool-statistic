@@ -13,6 +13,8 @@ import Vue from 'vue'
 import AmCharts from 'amcharts3'
 import AmPie from 'amcharts3/amcharts/pie'
 
+import util from '../../util'
+
 export default {
   name: 'userFactionCountChart',
   data: function () {
@@ -36,7 +38,7 @@ export default {
       // }
       
       return this.faction.map(d => {
-        d.color = Vue.util.getFactionColor(d.faction)
+        d.color = util.getFactionColor(d.faction)
         return d
       })
     },

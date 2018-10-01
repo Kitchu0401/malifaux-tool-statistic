@@ -12,6 +12,8 @@ import Vue from 'vue'
 import AmCharts from 'amcharts3'
 import AmPie from 'amcharts3/amcharts/pie'
 
+import util from '../../util'
+
 export default {
   name: 'factionCountChart',
   mounted: function () {
@@ -43,7 +45,7 @@ export default {
         result.push({
           faction: d.faction,
           count: 1,
-          color: Vue.util.getFactionColor(d.faction),
+          color: util.getFactionColor(d.faction),
           pulled: result.length === 0
         })
         

@@ -12,6 +12,8 @@ import Vue from 'vue'
 import AmCharts from 'amcharts3'
 import AmPie from 'amcharts3/amcharts/pie'
 
+import util from '../../util'
+
 export default {
   name: 'userCountChart',
   props: {
@@ -65,7 +67,7 @@ export default {
         }, [])
         .map(d => {
           d.faction = d.faction.sort((prev, next) => (prev.count - next.count) * -1)
-          d.color = Vue.util.getFactionColor(d.faction[0].faction)
+          d.color = util.getFactionColor(d.faction[0].faction)
           return d
         })
         .sort((prev, next) => (prev.total - next.total) * -1)

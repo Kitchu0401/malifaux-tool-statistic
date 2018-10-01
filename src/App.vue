@@ -2,12 +2,10 @@
 
   <div>
 
-    <navigator :change-menu="changeMenu" :current-menu="currentMenu" />
+    <navigator />
 
     <div class="container" style="padding: 16px 0px;">
-      <model  :model-list="modelList" v-if="currentMenu === 'model'" />
-      <user   :model-list="modelList" v-if="currentMenu === 'user'" />
-      <graph  :model-list="modelList" v-if="currentMenu === 'graph'" />
+      <router-view class="view" />
     </div>
 
   </div>
@@ -15,26 +13,12 @@
 </template>
 
 <script>
-import modelList from './data/modelList.json'
-
 import Navigator from './components/Navigator.vue'
-import Model from './components/Model.vue'
-import User from './components/User.vue'
-import Graph from './components/Graph.vue'
 
 export default {
   name: 'app',
   components: {
-    Navigator,
-    Model,
-    User,
-    Graph
-  },
-  data: function () {
-    return {
-      currentMenu: 'graph',
-      modelList: modelList
-    }
+    Navigator
   },
   methods: {
     changeMenu: function (menu) {

@@ -25,13 +25,15 @@
 <script>
 import Vue from 'vue'
 
+import graph from '../graph'
+
 export default {
   name: 'graph',
   props: {
     modelList: Array
   },
   mounted: function () {
-    this.graphObject = Vue.graph.initializeGraphObject(this.containerId, this.modelList)
+    this.graphObject = graph.initializeGraphObject(this.containerId, this.modelList)
     this.targetFaction = this.factionList[0]
     this.drawGraph()
   },
@@ -47,7 +49,7 @@ export default {
   methods: {
     drawGraph: function () {
       if (!!this.graphObject) {
-        Vue.graph.drawGraph(this.graphObject, this.targetFaction)
+        graph.drawGraph(this.graphObject, this.targetFaction)
       }
     }
   }

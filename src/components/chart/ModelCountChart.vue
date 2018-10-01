@@ -14,6 +14,8 @@ import Vue from 'vue'
 import AmCharts from 'amcharts3'
 import AmPie from 'amcharts3/amcharts/pie'
 
+import util from '../../util'
+
 export default {
   name: 'modelCountChart',
   props: {
@@ -50,7 +52,7 @@ export default {
           result.push({
             name: d.name,
             count: 1,
-            color: Vue.util.getFactionColor(d.faction)
+            color: util.getFactionColor(d.faction)
           })
           
           return result
