@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Malifaux Korea</a>
+    <a class="navbar-brand" href="/statistic">Malifaux Korea</a>
     <button class="navbar-toggler" type="button"
         data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-expanded="false" aria-label="Toggle navigation"

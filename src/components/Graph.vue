@@ -25,7 +25,7 @@
 <script>
 import Vue from 'vue'
 
-import graph from '../graph'
+import graph from '../util/graph'
 
 export default {
   name: 'graph',

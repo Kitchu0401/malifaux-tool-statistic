@@ -13,7 +13,7 @@ import Vue from 'vue'
 import AmCharts from 'amcharts3'
 import AmPie from 'amcharts3/amcharts/pie'
 
-import util from '../../util'
+import util from '../../util/common'
 
 export default {
   name: 'userFactionCountChart',

@@ -19,17 +19,15 @@ Vue.event = new Vue()
 Vue.use(VueRouter)
 Vue.use(VueBootstrap)
 
-const router = new VueRouter({
-  mode: 'history',
-  routes: [
-    { path: '/statistic',       component: Model, props: { modelList: modelList } },
-    { path: '/statistic/model', component: Model, props: { modelList: modelList } },
-    { path: '/statistic/user',  component: User,  props: { modelList: modelList } },
-    { path: '/statistic/graph', component: Graph, props: { modelList: modelList } }
-  ]
-})
-
 new Vue({
-  router,
+  router: new VueRouter({
+    mode: 'history',
+    routes: [
+      { path: '/statistic',       component: Model, props: { modelList: modelList } },
+      { path: '/statistic/model', component: Model, props: { modelList: modelList } },
+      { path: '/statistic/user',  component: User,  props: { modelList: modelList } },
+      { path: '/statistic/graph', component: Graph, props: { modelList: modelList } }
+    ]
+  }),
   render: h => h(App)
 }).$mount('#app')

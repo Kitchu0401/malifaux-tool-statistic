@@ -1,6 +1,6 @@
 import go from 'gojs'
 
-import util from './util'
+import util from './common'
 
 // Cached dataset
 let crewList = []
