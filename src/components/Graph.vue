@@ -1,41 +1,50 @@
 <template>
   
   <ul class="list-group">
-    <li class="list-group-item" id="model-relation-graph" v-show="name">
+    <li class="list-group-item" id="model-relation-graph">
       <p class="h3">
-        <span>모델 고용 관계 그래프 </span>
-        <small class="description" v-show="name">({{ name }})</small>
+        <span>모델 고용 관계 그래프</span>
       </p>
-      <div id="model-relation-graph-container" style="width: 100%; height: 600px"></div>
+      <div :id="containerId" :style="containerCss"></div>
     </li>
   </ul>
 
 </template>
 
 <script>
+import Vue from 'vue'
+
 export default {
   name: 'graph',
   props: {
     modelList: Array
   },
   mounted: function () {
-    this.initialize()
-
-    console.log(this.nodeArray)
-    console.log(this.linkArray)
+    this.graphObject = Vue.graph.initializeGraphObject(this.containerId, this.modelList)
+    this.draw()
   },
   data: function () {
     return {
-      nodeArray: [],
-      linkArray: []
+      containerId: 'model-relation-graph-container',
+      containerCss: { width: '100%', height: '840px' },
+      graphObject: null,
+      targetFaction: 'Guild',
+      targetModel: 'Sonnia'
     }
   },
   methods: {
-    initialize: function () {
-      // Add root node
-      nodeArray.push({ key: 1, name: 'Ice Gamin' })
-
-      
+    change: function (faction, model) {
+      this.targetFaction = faction
+      this.targetModel = model
+      this.draw()
+    },
+    draw: function () {
+      if (!!this.graphObject) {
+        Vue.graph.drawGraph(
+          this.graphObject,
+          this.targetFaction,
+          this.targetModel)
+      }
     }
   }
 }

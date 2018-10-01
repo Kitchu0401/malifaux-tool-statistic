@@ -7,7 +7,7 @@
     <div class="container" style="padding: 16px 0px;">
       <model  :model-list="modelList" v-if="currentMenu === 'model'" />
       <user   :model-list="modelList" v-if="currentMenu === 'user'" />
-      <user   :model-list="modelList" v-if="currentMenu === 'graph'" />
+      <graph  :model-list="modelList" v-if="currentMenu === 'graph'" />
     </div>
 
   </div>
@@ -32,7 +32,7 @@ export default {
   },
   data: function () {
     return {
-      currentMenu: 'user',
+      currentMenu: 'graph',
       modelList: modelList
     }
   },

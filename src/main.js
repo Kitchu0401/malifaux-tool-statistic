@@ -5,11 +5,13 @@ import Vue from 'vue'
 import VueBootstrap from 'bootstrap-vue'
 
 import App from './App.vue'
+import graph from './graph'
 import util from './util'
 import './registerServiceWorker'
 
 Vue.config.productionTip = false
 Vue.event = new Vue()
+Vue.graph = graph
 Vue.util = util
 
 Vue.use(VueBootstrap)

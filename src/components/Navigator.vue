@@ -8,8 +8,9 @@
     <b-collapse is-nav id="nav_collapse">
 
       <b-navbar-nav>
-        <b-nav-item @click="changeMenu('user')" :class="currentMenu === 'user' ? 'active' : ''">플레이어 기준 통계보기</b-nav-item>
-        <b-nav-item @click="changeMenu('model')" :class="currentMenu === 'model' ? 'active' : ''">모델 기준 통계보기</b-nav-item>
+        <b-nav-item @click="changeMenu('user')" :class="currentMenu === 'user' ? 'active' : ''">플레이어 기준 통계 보기</b-nav-item>
+        <b-nav-item @click="changeMenu('model')" :class="currentMenu === 'model' ? 'active' : ''">모델 기준 통계 보기</b-nav-item>
+        <b-nav-item @click="changeMenu('graph')" :class="currentMenu === 'graph' ? 'active' : ''">모델 관계 보기</b-nav-item>
       </b-navbar-nav>
 
     </b-collapse>
